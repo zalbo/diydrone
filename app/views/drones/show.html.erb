@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @drone.title %>
+</p>
+
+<p>
+  <strong>Tv user:</strong>
+  <%= @drone.tv_user %>
+</p>
+
+<%= link_to 'Edit', edit_drone_path(@drone) %> |
+<%= link_to 'Back', drones_path %>

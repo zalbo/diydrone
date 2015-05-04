@@ -1,0 +1,3 @@
+class CallbackController < ApplicationController
+
+end
