@@ -1,3 +1,6 @@
+
+
+
 class DronesController < ApplicationController
   before_action :set_drone, only: [:show, :edit, :update, :destroy]
 
@@ -25,7 +28,7 @@ class DronesController < ApplicationController
   # POST /drones.json
   def create
     @drone = Drone.new(drone_params)
-    binding.pry
+
     respond_to do |format|
       if @drone.save
         format.html { redirect_to @drone, notice: 'Drone was successfully created.' }
@@ -69,6 +72,6 @@ class DronesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def drone_params
-      params.require(:drone).permit(:title, :tv_user)
+      params.require(:drone).permit(:title, :user)
     end
 end

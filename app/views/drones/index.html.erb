@@ -14,8 +14,9 @@
   <tbody>
     <% @drones.each do |drone| %>
       <tr>
+        <td><%= drone.id %></td>
         <td><%= drone.title %></td>
-        <td><%= drone.tv_user %></td>
+        <td><%= drone.user %></td>
         <td><%= link_to 'Show', drone %></td>
         <td><%= link_to 'Edit', edit_drone_path(drone) %></td>
         <td><%= link_to 'Destroy', drone, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -27,7 +27,9 @@ gem 'dotenv'
 gem 'sinatra'
 gem 'thingiverse'
 gem 'pry'
-
+gem "active_model_serializers"
+gem 'clockwork', '~> 1.2.0'
+gem 'foreman', '~> 0.78.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -1,11 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  user: MyString
-  tv_id: 1
+  tag: MyString
 
 two:
-  title: MyString
-  user: MyString
-  tv_id: 1
+  tag: MyString

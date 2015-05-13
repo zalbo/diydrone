@@ -18,7 +18,7 @@ class DronesControllerTest < ActionController::TestCase
 
   test "should create drone" do
     assert_difference('Drone.count') do
-      post :create, drone: { title: @drone.title, tv_user: @drone.tv_user }
+      post :create, drone: { title: @drone.title, user: @drone.user }
     end
 
     assert_redirected_to drone_path(assigns(:drone))
@@ -35,7 +35,7 @@ class DronesControllerTest < ActionController::TestCase
   end
 
   test "should update drone" do
-    patch :update, id: @drone, drone: { title: @drone.title, tv_user: @drone.tv_user }
+    patch :update, id: @drone, drone: { title: @drone.title, user: @drone.user }
     assert_redirected_to drone_path(assigns(:drone))
   end
 
