@@ -45,23 +45,49 @@ namespace :suck_tv do
 
       token = Token.first.content
       page = 1
-      tv_id= []
+      id= []
 
       Drone.all.each do |project_db|
-        tv_id << project_db.tv_id.to_s
+        id << project_db.id.to_s
       end
 
       while Net::HTTP.get(URI("https://api.thingiverse.com/search/#{tag.tag}/?access_token=#{token}&page=#{page.to_s}")) != "{\"error\":\"Not Found\"}"
         res = formatjson("https://api.thingiverse.com/search/#{tag.tag}/?access_token=#{token}&page=#{page.to_s}")
         res.each do |project|
-          if tv_id.include? project["id"]
+          if id.include? project["id"]
             puts "ALERT:: #{project["name"]} is already in the database"
           else
             project_detail = formatjson("#{project["url"]}?access_token=#{token}")
+            api_file = formatjson("#{project_detail["files_url"]}?access_token=#{token}")
             if project_detail["default_image"] == nil
               puts "ALERT:: #{project["name"]}is empty"
-            else
-              Drone.create(title: project["name"], user: project["creator"]["name"], tv_id: project["id"], tv_image: project_detail["default_image"]["sizes"])
+            else #insert project
+              url_image = []
+
+              project_detail["default_image"]["sizes"].each do |image|
+                url_image << image["url"]
+              end
+              Drone.create(title: project["name"], user: project["creator"]["name"], id: project["id"], tv_image: url_image)
+
+              api_file.each do |file|
+                
+                url_image_file = []
+                if file["name"].last(3).upcase != "STL"
+                  url_image_file << "no image"
+                else
+                  #check if there are image into file
+                  images = file["default_image"]
+                  if images.nil?
+                    puts "no image in to file"
+                  else
+                    file["default_image"]["sizes"].each do |image|
+                      url_image_file << image["url"]
+                    end
+                  end
+                end
+                drone = Drone.find(project["id"])
+                drone.file3ds.create(id: file["id"], name: file["name"], size: file["formatted_size"],  download: file["public_url"] , image: url_image_file)
+              end
               puts "OK:: #{project["name"]} insert"
             end
           end

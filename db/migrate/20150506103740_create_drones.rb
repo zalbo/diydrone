@@ -3,7 +3,6 @@ class CreateDrones < ActiveRecord::Migration
     create_table :drones do |t|
       t.string :title
       t.string :user
-      t.integer :tv_id
       t.string :tv_image , array: true
 
       t.timestamps null: false
