@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby ENV['CUSTOM_RUBY_VERSION'] || '2.1.1'
+ruby ENV['CUSTOM_RUBY_VERSION'] || '2.2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
@@ -30,6 +30,7 @@ gem "active_model_serializers"
 gem 'clockwork', '~> 1.2.0'
 gem 'foreman', '~> 0.78.0'
 gem 'rails_12factor', group: :production #for heroku
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
