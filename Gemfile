@@ -30,6 +30,7 @@ gem "active_model_serializers"
 gem 'clockwork', '~> 1.2.0'
 gem 'foreman', '~> 0.78.0'
 gem 'rails_12factor', group: :production #for heroku
+gem 'puma'
 
 
 # Use ActiveModel has_secure_password
