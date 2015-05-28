@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get 'pages/suck_tv_projects'
   get 'pages/callback'
 
+  get 'herokutoken/suck_tv_projects'
+  get 'herokutoken/callback'
+
 
 
 

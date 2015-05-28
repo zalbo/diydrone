@@ -3,9 +3,7 @@ Dotenv.load
 require 'thingiverse'
 require "net/http"
 
-
 class PagesController < ApplicationController
-
 
   def suck_tv_projects
     client_id = ENV['CLIENT_ID']
@@ -23,6 +21,5 @@ class PagesController < ApplicationController
     @tv = Thingiverse::Connection.new(client_id, client_secret, params[:code])
 
     Token.create(content:@tv.access_token)
-    redirect_to "http://localhost:3000"
   end
 end
