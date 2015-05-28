@@ -22,6 +22,4 @@ class HerokutokenController < ApplicationController
 
       Token.create(content:@tv.access_token)
     end
-  end
-
 end
