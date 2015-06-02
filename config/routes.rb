@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :drones
   get 'pages/suck_tv_projects'
   get 'pages/callback'

@@ -4384,11 +4384,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .navbar-left {
+
     float: left !important;
   }
   .navbar-right {
     float: right !important;
-    margin-right: -15px;
+    align: right
+
   }
   .navbar-right ~ .navbar-right {
     margin-right: 0;

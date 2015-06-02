@@ -31,6 +31,8 @@ gem 'clockwork', '~> 1.2.0'
 gem 'foreman', '~> 0.78.0'
 gem 'rails_12factor', group: :production #for heroku
 gem 'puma'
+gem 'devise' #login
+gem "paperclip", "~> 4.2" #upload image
 
 
 # Use ActiveModel has_secure_password
