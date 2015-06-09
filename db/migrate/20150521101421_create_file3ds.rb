@@ -6,6 +6,7 @@ class CreateFile3ds < ActiveRecord::Migration
       t.string :download
       t.string :image , array: true
       t.integer :drone_id
+
       
 
       t.timestamps null: false

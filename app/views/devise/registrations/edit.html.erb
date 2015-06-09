@@ -27,10 +27,11 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
-  <%= simple_form_for @user, url: users_path do |form| %>
-  <%= form.input :avatar, as: :file %>
-<% end %>
-
+  <div>
+      Add Your <%= f.label :avatar %>:
+      <%= f.file_field :avatar %>
+  </div>
+  
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
