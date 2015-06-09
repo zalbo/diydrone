@@ -3,9 +3,10 @@ class CreateFile3ds < ActiveRecord::Migration
     create_table :file3ds do |t|
       t.string :name
       t.string :size
-      t.string :link
       t.string :download
       t.string :image , array: true
+      t.integer :drone_id
+      
 
       t.timestamps null: false
     end
