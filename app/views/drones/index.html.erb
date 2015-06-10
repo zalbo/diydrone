@@ -22,8 +22,12 @@
 
         <% @drones.each do |drone| %>
         <div class="col-lg-4 col-sm-6 text-center">
-          <%= link_to ( image_tag("#{drone.tv_image[8]}")), drone_path(drone) %>
-            <h3><%=truncate(drone.title, :length => 25)%></h3>
+          <% if drone.tv_image%>
+            <%= link_to ( image_tag("#{drone.tv_image[8]}")), drone_path(drone) %>
+          <% else %>
+            <%= link_to ( image_tag("no_image.gif")), drone_path(drone) %>
+          <%end%>
+        <h3><%=truncate(drone.title, :length => 25)%></h3>
 
         </div>
         <% end %>
@@ -32,7 +36,7 @@
 
         <!-- Footer -->
         <footer>
-            <div class="row">
+            <div class="row"
                 <div class="col-lg-12">
                     <p>Copyright &copy; Your Website 2014</p>
                 </div>
