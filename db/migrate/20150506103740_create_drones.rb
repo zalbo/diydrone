@@ -3,10 +3,10 @@ class CreateDrones < ActiveRecord::Migration
     create_table :drones do |t|
       t.string :title
       t.string :user
-      t.string :tv_image , array: true
+      t.string :image , array: true
 
       t.timestamps null: false
     end
-    add_index :drones, :tv_image, using: 'gin'
+    add_index :drones, :image, using: 'gin'
   end
 end

@@ -22,8 +22,8 @@
 
         <% @drones.each do |drone| %>
         <div class="col-lg-4 col-sm-6 text-center">
-          <% if drone.tv_image%>
-            <%= link_to ( image_tag("#{drone.tv_image[8]}")), drone_path(drone) %>
+          <% if drone.image%>
+            <%= link_to ( image_tag("#{drone.image[8]}")), drone_path(drone) %>
           <% else %>
             <%= link_to ( image_tag("no_image.gif")), drone_path(drone) %>
           <%end%>

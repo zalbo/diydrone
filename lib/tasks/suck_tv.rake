@@ -67,10 +67,10 @@ namespace :suck_tv do
               project_detail["default_image"]["sizes"].each do |image|
                 url_image << image["url"]
               end
-              Drone.create(title: project["name"], user: project["creator"]["name"], id: project["id"], tv_image: url_image)
+              Drone.create(title: project["name"], user: project["creator"]["name"], id: project["id"], image: url_image)
 
               api_file.each do |file|
-                
+
                 url_image_file = []
                 if file["name"].last(3).upcase != "STL"
                   url_image_file << "no image"

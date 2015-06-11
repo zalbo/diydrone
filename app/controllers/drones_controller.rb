@@ -28,10 +28,12 @@ class DronesController < ApplicationController
   # POST /drones
   # POST /drones.json
   def create
+    binding.pry
     @drone = Drone.new(drone_params)
 
     respond_to do |format|
       if @drone.save
+
         format.html { redirect_to @drone, notice: 'Drone was successfully created.' }
         format.json { render :show, status: :created, location: @drone }
       else
@@ -73,6 +75,8 @@ class DronesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def drone_params
-      params.require(:drone).permit(:title, :user)
+
+      binding.pry
+      params.require(:drone).permit(:title, :user , :file )
     end
 end

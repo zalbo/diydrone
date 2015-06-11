@@ -33,6 +33,7 @@ gem 'rails_12factor', group: :production #for heroku
 gem 'puma'
 gem 'devise' #login
 gem "paperclip", "~> 4.2" #upload image
+gem 'simple_form'
 
 
 # Use ActiveModel has_secure_password
