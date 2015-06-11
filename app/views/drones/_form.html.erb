@@ -11,11 +11,10 @@
     </div>
   <% end %>
 
-  <%= form_for @drone, :html => { :multipart => true } do |form| %>
 
+  <%= form_for(@drone, :html => { :multipart => true } ) do |f| %>
 
-
-    <%= form.file_field :file%>
+    <%= f.file_field :file%>
 
 
 
