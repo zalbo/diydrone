@@ -32,7 +32,15 @@ class DronesController < ApplicationController
     @drone = Drone.new(drone_params)
 
     respond_to do |format|
+
       if @drone.save
+
+        params[:drone][:enclosure].each do |file|
+
+          @drone.file_projects.create(:file_project => file , enclosure_content_type: file.content_type , enclosure_file_name: file.original_filename)
+
+        end
+      # Don't forget to mention :avatar(field name)
 
         format.html { redirect_to @drone, notice: 'Drone was successfully created.' }
         format.json { render :show, status: :created, location: @drone }
@@ -75,6 +83,6 @@ class DronesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def drone_params
-      params.require(:drone).permit(:title, :user , :file )
+      params.require(:drone).permit(:title, :user )
     end
 end

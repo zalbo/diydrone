@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611113443) do
+ActiveRecord::Schema.define(version: 20150612113450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,13 +19,9 @@ ActiveRecord::Schema.define(version: 20150611113443) do
   create_table "drones", force: :cascade do |t|
     t.string   "title"
     t.string   "user"
-    t.string   "image",                          array: true
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
+    t.string   "image",                   array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "drones", ["image"], name: "index_drones_on_image", using: :gin
@@ -41,6 +37,16 @@ ActiveRecord::Schema.define(version: 20150611113443) do
   end
 
   add_index "file3ds", ["image"], name: "index_file3ds_on_image", using: :gin
+
+  create_table "file_projects", force: :cascade do |t|
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "drone_id"
+    t.string   "enclosure_file_name"
+    t.string   "enclosure_content_type"
+    t.integer  "enclosure_file_size"
+    t.datetime "enclosure_updated_at"
+  end
 
   create_table "tags_suck_tvs", force: :cascade do |t|
     t.string   "tag"

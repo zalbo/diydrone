@@ -1,6 +1,7 @@
 class Drone < ActiveRecord::Base
-  has_many :file3ds , dependent: :delete_all
+  has_many :file3ds , dependent: :destroy
+  has_many :file_projects, dependent: :destroy
 
-  has_attached_file :file
-  do_not_validate_attachment_file_type :file
+
+
 end
