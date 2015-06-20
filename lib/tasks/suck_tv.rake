@@ -86,7 +86,7 @@ namespace :suck_tv do
                   end
                 end
                 drone = Drone.find(project["id"])
-                drone.file3ds.create(id: file["id"], name: file["name"], size: file["formatted_size"],  download: file["public_url"] , image: url_image_file)
+                drone.file_projects.create(id: file["id"], name: file["name"], size: file["formatted_size"],  download: file["public_url"] , image: url_image_file)
               end
               puts "OK:: #{project["name"]} insert"
             end
