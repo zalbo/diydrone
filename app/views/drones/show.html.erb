@@ -12,7 +12,7 @@
         <h2>FILE</h2>
 <% @drone.file_projects.each do |file| %>
   <p>
-
+    <%= file.enclosure_file_name %>
     <%= file.name %>
   </p>
 
