@@ -1,4 +1,4 @@
-<%= form_for(@drone, :html => { :multipart => true } ) do |f| %>
+<!-- <%= form_for(@drone, :html => { :multipart => true } ) do |f| %>
   <% if @drone.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@drone.errors.count, "error") %> prohibited this drone from being saved:</h2>
@@ -30,4 +30,38 @@
     <%= f.submit %>
   </div>
 
+<% end %> -->
+
+
+<%= form_for(@upload, html: { multipart: true }) do |f| %>
+  <% if @upload.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@upload.errors.count, "error") %> prohibited this upload from being saved:</h2>
+
+      <ul>
+        <% @upload.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="actions">
+    <%= f.label :user %><br>
+    <%= f.text_field :user %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.label :uploaded_file, t('.upload_new_file') %>
+    <%= f.file_field :uploaded_file, multiple: true, name: 'upload[uploaded_file]' %>
+    <%= f.submit %>
+  </div>
 <% end %>
+
+<% # jquery upload template # %>
+<script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="progress-bar bar" style="width: 0%"></div></div></div></script>

@@ -10,4 +10,5 @@
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :full_name, :description, :password, :current_password, :password_confirmation, :avatar)}
 
     end
+    protect_from_forgery with: :exception
   end

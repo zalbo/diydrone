@@ -19,6 +19,7 @@ class DronesController < ApplicationController
   # GET /drones/new
   def new
     @drone = Drone.new
+    @upload = Drone.new
   end
 
   # GET /drones/1/edit
@@ -28,7 +29,6 @@ class DronesController < ApplicationController
   # POST /drones
   # POST /drones.json
   def create
-
 
     @drone = Drone.new(drone_params)
 

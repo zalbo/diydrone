@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150620160946) do
+ActiveRecord::Schema.define(version: 20150625105307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,29 +19,25 @@ ActiveRecord::Schema.define(version: 20150620160946) do
   create_table "drones", force: :cascade do |t|
     t.string   "title"
     t.string   "user"
-    t.string   "image",                               array: true
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "enclosure_file_name"
-    t.string   "enclosure_content_type"
-    t.integer  "enclosure_file_size"
-    t.datetime "enclosure_updated_at"
+    t.string   "image",                   array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "drones", ["image"], name: "index_drones_on_image", using: :gin
 
   create_table "file_projects", force: :cascade do |t|
-    t.string   "image",                               array: true
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "image",                                   array: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "drone_id"
     t.string   "name"
     t.string   "size"
     t.string   "download"
-    t.string   "enclosure_file_name"
-    t.string   "enclosure_content_type"
-    t.integer  "enclosure_file_size"
-    t.datetime "enclosure_updated_at"
+    t.string   "uploaded_file_file_name"
+    t.string   "uploaded_file_content_type"
+    t.integer  "uploaded_file_file_size"
+    t.datetime "uploaded_file_updated_at"
   end
 
   add_index "file_projects", ["image"], name: "index_file_projects_on_image", using: :gin
@@ -56,6 +52,15 @@ ActiveRecord::Schema.define(version: 20150620160946) do
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "uploads", force: :cascade do |t|
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "uploaded_file_file_name"
+    t.string   "uploaded_file_content_type"
+    t.integer  "uploaded_file_file_size"
+    t.datetime "uploaded_file_updated_at"
   end
 
   create_table "users", force: :cascade do |t|
