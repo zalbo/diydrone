@@ -1,24 +1,21 @@
 class UploadsController < ApplicationController
   before_action :set_upload, only: [:show, :edit, :update, :destroy]
+  before_action :load_drone
+
+  def load_drone
+    @drone = Drone.find(params[:drone_id])
+  end
 
   # GET /uploads
   # GET /uploads.json
   def index
-    @uploads = Upload.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @uploads }
-    end
+    @uploads = @drone.uploads
   end
 
   # GET /uploads/1
   # GET /uploads/1.json
   def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @upload }
-    end
   end
 
   # GET /uploads/new
@@ -33,14 +30,14 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-      @upload = Upload.create(upload_params)
-
+    @upload = Upload.create(upload_params)
+    @drone.uploads << @upload
     respond_to do |format|
-      if @upload.save
-        format.html { redirect_to @upload, notice: 'Upload was successfully created.' }
-        format.json { render json: @upload, status: :created }
+      if @upload.update(upload_params)
+        format.html { redirect_to "/drones/#{@drone.id}", notice: 'Upload was successfully updated.' }
+        format.json { head :no_content }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'edit' }
         format.json { render json: @upload.errors, status: :unprocessable_entity }
       end
     end

@@ -8,10 +8,9 @@ Rails.application.routes.draw do
   get 'herokutoken/suck_tv_projects'
   get 'herokutoken/callback'
 
-
-
-
-
+  resources :drones do
+    resources :uploads
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

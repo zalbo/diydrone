@@ -9,14 +9,17 @@
 
 
 
-        <h2>FILE</h2>
+        <h2>FILE guru</h2>
 <% @drone.file_projects.each do |file| %>
   <p>
-    <%= file.enclosure_file_name %>
     <%= file.name %>
   </p>
+<% end %>
 
-
+<% @drone.uploads.each do |file| %>
+  <p>
+    <%= file.uploaded_file_file_name %>
+  </p>
 <% end %>
 
     </div>

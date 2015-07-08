@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
@@ -9,6 +9,10 @@
 <!-- Inclue Twitter bootstrap -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<% # jquery upload template # %>
+<script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="progress-bar bar" style="width: 0%"></div></div></div></script>
+
 <%= csrf_meta_tags %>
 
 
@@ -72,7 +76,7 @@
           <% unless current_user.avatar.url(:thumb) == "/images/thumb/missing.png" %>
           <%= image_tag current_user.avatar.url(:thumb) %>
           <% end %>
-          <%= link_to 'Upload your project', new_drone_path %>
+          <%= link_to 'Upload your project', new_drone_path  %>
           <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
           <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
         <% else %>
@@ -89,7 +93,9 @@
       <!-- /.container -->
   </nav>
   <br>
+
 <%= yield %>
+
 
 
 </body>

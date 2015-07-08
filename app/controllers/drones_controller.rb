@@ -1,6 +1,4 @@
 
-
-
 class DronesController < ApplicationController
   before_action :set_drone, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: ['index', 'show']
@@ -19,7 +17,6 @@ class DronesController < ApplicationController
   # GET /drones/new
   def new
     @drone = Drone.new
-    @upload = Drone.new
   end
 
   # GET /drones/1/edit
@@ -32,16 +29,11 @@ class DronesController < ApplicationController
 
     @drone = Drone.new(drone_params)
 
+
     respond_to do |format|
-
-
       if @drone.save
-        params[:drone][:enclosure].each do |file|
-         @drone.file_projects.create(:enclosure=> file)
-       end
 
-
-        format.html { redirect_to @drone, notice: 'Drone was successfully created.' }
+        format.html { redirect_to "/drones/#{@drone.id}/uploads/new", notice: 'Drone was successfully created.' }
         format.json { render :show, status: :created, location: @drone }
       else
         format.html { render :new }
@@ -50,18 +42,13 @@ class DronesController < ApplicationController
     end
   end
 
+
+
   # PATCH/PUT /drones/1
   # PATCH/PUT /drones/1.json
   def update
-    respond_to do |format|
-      if @drone.update(drone_params)
-        format.html { redirect_to @drone, notice: 'Drone was successfully updated.' }
-        format.json { render :show, status: :ok, location: @drone }
-      else
-        format.html { render :edit }
-        format.json { render json: @drone.errors, status: :unprocessable_entity }
-      end
-    end
+    @drone.file_projects.create(:uploaded_file => params[:upload][:uploaded_file])
+     redirect_to drones_url
   end
 
   # DELETE /drones/1
@@ -83,6 +70,6 @@ class DronesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def drone_params
 
-      params.require(:drone).permit(:title, :user)
+      params.require(:drone).permit(:title, :user )
     end
 end

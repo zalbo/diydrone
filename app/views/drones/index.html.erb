@@ -2,8 +2,6 @@
 
 <h1>Listing Drones</h1>
 
-
-
 <br>
 
 
@@ -25,7 +23,7 @@
           <% if drone.image%>
             <%= link_to ( image_tag("#{drone.image[8]}")), drone_path(drone) %>
           <% else %>
-            <%= link_to ( image_tag("no_image.gif")), drone_path(drone) %>
+            <%= link_to ( image_tag("x_red.png")), drone_path(drone) %>
           <%end%>
         <h3><%=truncate(drone.title, :length => 25)%></h3>
 
@@ -47,9 +45,3 @@
 
     </div>
     <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
