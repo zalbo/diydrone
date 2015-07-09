@@ -32,15 +32,8 @@ class UploadsController < ApplicationController
   def create
     @upload = Upload.create(upload_params)
     @drone.uploads << @upload
-    respond_to do |format|
-      if @upload.update(upload_params)
-        format.html { redirect_to "/drones/#{@drone.id}", notice: 'Upload was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
-      end
-    end
+
+    @drone.update(image: @drone.id)
   end
 
   # PATCH/PUT /uploads/1
