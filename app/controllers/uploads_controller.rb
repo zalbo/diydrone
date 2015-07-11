@@ -30,6 +30,7 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
+    binding.pry
     @upload = Upload.create(upload_params)
     @drone.uploads << @upload
 

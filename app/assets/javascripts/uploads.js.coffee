@@ -7,7 +7,7 @@ jQuery ->
   $('#new_upload').fileupload
     dataType: 'script'
     add: (e, data) ->
-      types = /(\.|\/)(jpe?g|png|mov|mpeg|mpeg4|avi)$/i
+      types = /(\.|\/)(stl|jpe?g|png|mov|mpeg|mpeg4|avi)$/i
       file = data.files[0]
       if types.test(file.type) || types.test(file.name)
         data.context = $(tmpl("template-upload", file))
