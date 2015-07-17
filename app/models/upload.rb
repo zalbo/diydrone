@@ -13,10 +13,12 @@ class Upload < ActiveRecord::Base
         end
       end
 
-      def is_image_type?
-  uploaded_file_content_type =~ %r(image)
-end
 
-validates_attachment_content_type :uploaded_file, :content_type => [/\Aimage\/.*\Z/,  , /\Atext\/.*\Z/]
+      def is_image_type?
+        uploaded_file_content_type =~ %r(image)
+      end
+
+
+      validates_attachment_content_type :uploaded_file, :content_type => [/\Aimage\/.*\Z/, /\Atext\/.*\Z/, /\Aapplication\/.*\Z/]
 
 end
