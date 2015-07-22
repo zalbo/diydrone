@@ -37,14 +37,12 @@ class UploadsController < ApplicationController
     file = @upload.uploaded_file_file_name
     povfile = file.sub '.stl' , '.pov'
     pngfile = file.sub '.stl' , '.png'
-    url = "/usr/local/bin/stl2pov-master"
+    url = "#{Rails.root.to_s}/tmp"
     system("cp #{@upload.uploaded_file.path} #{url}")
-    system(" #{url}/stl2pov  #{url}/#{file} >  #{url}/#{povfile}")
-    system("rm  #{url}/#{file}")
+    system(" /usr/local/bin/stl2pov-master/stl2pov  #{url}/#{file} >  #{url}/#{povfile}")
     system("povray +I#{url}/#{povfile} +O#{url}/#{pngfile} +D +P +W640 +H480 +A0.5")
-    system("rm  #{url}/#{povfile}")
 
-
+ @drone.uploads << Upload.new(uploaded_file: File.open("#{url}/#{pngfile}", 'rb'))
 
 
     @drone.update(image: @drone.id)
