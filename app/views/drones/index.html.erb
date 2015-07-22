@@ -25,7 +25,7 @@
             <%= link_to ( image_tag("#{drone.image[8]}")), drone_path(drone) %>
           <% elsif drone.uploads %>
             <% begin %>
-              <%= link_to ( image_tag drone.uploads[0].uploaded_file.url(:thumb)), drone_path(drone) %>
+              <%= link_to ( image_tag drone.uploads[0].uploaded_file.url(:original)), drone_path(drone) %>
             <% rescue NoMethodError %>
               <%= link_to ( image_tag("x_red.png")), drone_path(drone) %>
             <%end%>

@@ -1,7 +1,7 @@
 namespace :drones do
-  desc "delete all article off drones"
+  desc "destroy all article off drones"
   task delete: :environment do
-    Drone.delete_all
+    Drone.all.destroy_all
   end
 
   desc "Test insert one project"

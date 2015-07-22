@@ -1,5 +1,3 @@
-
-
 <p id="notice"><%= notice %></p>
 
 <div class="row">
@@ -20,6 +18,20 @@
   <p>
     <%= file.uploaded_file_file_name %>
   </p>
+ <script>
+
+     window.onload =$( document ).ready (function() {
+       thingiurlbase = "/js";
+       thingiview = new Thingiview("viewer<%= file.uploaded_file_file_name %>");
+       thingiview.setObjectColor('#C0D8F0');
+       thingiview.initScene();
+
+       thingiview.loadSTL("<%=file.uploaded_file.url(:original)%>");
+     });
+   </script>
+
+   <div id="viewer<%= file.uploaded_file_file_name %>" style="width:300px;height:300px"></div>
+
 <% end %>
 
     </div>

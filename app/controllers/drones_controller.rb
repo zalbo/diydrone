@@ -30,6 +30,8 @@ class DronesController < ApplicationController
     @drone = Drone.new(drone_params)
 
 
+
+
     respond_to do |format|
       if @drone.save
 
