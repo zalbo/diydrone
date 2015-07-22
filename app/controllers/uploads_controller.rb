@@ -38,14 +38,11 @@ class UploadsController < ApplicationController
     povfile = file.sub '.stl' , '.pov'
     pngfile = file.sub '.stl' , '.png'
     url = "/usr/local/bin/stl2pov-master"
-
-
     system("cp #{@upload.uploaded_file.path} #{url}")
     system(" #{url}/stl2pov  #{url}/#{file} >  #{url}/#{povfile}")
     system("rm  #{url}/#{file}")
     system("povray +I#{url}/#{povfile} +O#{url}/#{pngfile} +D +P +W640 +H480 +A0.5")
     system("rm  #{url}/#{povfile}")
-    binding.pry
 
 
 
