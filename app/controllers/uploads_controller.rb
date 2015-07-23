@@ -34,15 +34,8 @@ class UploadsController < ApplicationController
     @upload = Upload.create(upload_params)
     @drone.uploads << @upload
 
-    file = @upload.uploaded_file_file_name
-    povfile = file.sub '.stl' , '.pov'
-    pngfile = file.sub '.stl' , '.png'
-    url = "#{Rails.root.to_s}/tmp"
-    system("cp #{@upload.uploaded_file.path} #{url}")
-    system(" /usr/local/bin/stl2pov-master/stl2pov  #{url}/#{file} >  #{url}/#{povfile}")
-    system("povray +I#{url}/#{povfile} +O#{url}/#{pngfile} +D +P +W640 +H480 +A0.5")
+    @upload.generate_render_stl if @upload.is_stl?
 
- @drone.uploads << Upload.new(uploaded_file: File.open("#{url}/#{pngfile}", 'rb'))
 
 
     @drone.update(image: @drone.id)
