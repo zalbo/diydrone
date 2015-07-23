@@ -39,6 +39,7 @@ gem 'devise' #login
 gem "paperclip", "~> 4.2" #upload image
 gem 'therubyracer'
 gem 'jquery-fileupload-rails'
+gem 'stl' #valiation stl
 
 
 # Use ActiveModel has_secure_password

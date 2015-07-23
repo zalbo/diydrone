@@ -18,7 +18,10 @@ class Upload < ActiveRecord::Base
     validates_attachment_content_type :uploaded_file, :content_type => [/\Aimage\/.*\Z/, /\Atext\/.*\Z/, /\Aapplication\/.*\Z/]
 
     def is_stl?
-      uploaded_file_content_type =~ %r(text) || %r(application)
+      require 'stl'
+      if stl = STL.read(self.uploaded_file.path)
+        return true
+      end
     end
 
     def generate_render_stl
