@@ -40,6 +40,7 @@ gem "paperclip", "~> 4.2" #upload image
 gem 'therubyracer'
 gem 'jquery-fileupload-rails'
 gem 'stl' #valiation stl
+gem 'sucker_punch', '~> 1.0' #async
 
 
 # Use ActiveModel has_secure_password

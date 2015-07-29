@@ -1,4 +1,5 @@
 class Upload < ActiveRecord::Base
+
   belongs_to :drone
 
   has_attached_file :uploaded_file,
@@ -24,15 +25,5 @@ class Upload < ActiveRecord::Base
       end
     end
 
-    def generate_render_stl
-      file = self.uploaded_file_file_name
-      povfile = file.sub '.stl' , '.pov'
-      pngfile = file.sub '.stl' , '.png'
-      url = "#{Rails.root.to_s}/tmp"
-      system("cp #{self.uploaded_file.path} #{url}")
-      system("/usr/local/bin/stl2pov-master/stl2pov #{url}/#{file} >  #{url}/#{povfile}")
-      system("povray +I#{url}/#{povfile} +O#{url}/#{pngfile} +D +P +W640 +H480 +A0.5")
-      drone = Drone.find(self.drone_id)
-      drone.uploads << Upload.new(uploaded_file: File.open("#{url}/#{pngfile}", 'rb'))
-    end
+
 end

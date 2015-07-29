@@ -34,11 +34,8 @@ class UploadsController < ApplicationController
     @upload = Upload.create(upload_params)
     @drone.uploads << @upload
 
-    @upload.generate_render_stl if @upload.is_stl?
+    RenderstlJob.new.async.perform(@upload) if @upload.is_stl?
 
-
-
-    @drone.update(image: @drone.id)
   end
 
   # PATCH/PUT /uploads/1
