@@ -67,7 +67,7 @@ namespace :suck_tv do
               project_detail["default_image"]["sizes"].each do |image|
                 url_image << image["url"]
               end
-              Drone.create(title: project["name"], user: project["creator"]["name"], id: project["id"], image: url_image)
+              Drone.create(title: project["name"], user: project["creator"]["name"], id: project["id"], image: url_image , fromtv: true )
 
               api_file.each do |file|
 

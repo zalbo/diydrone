@@ -7,7 +7,7 @@ class Upload < ActiveRecord::Base
 
     def check_file_type
       if is_image_type?
-        {:small => "x200>", :medium => "x300>", :thumb => "x100>" }
+        {:small => "x200>", :medium => "x300>", :thumb => "x100>" , :large => "x600>" }
       else
         {}
       end

@@ -3,38 +3,56 @@
 <div class="row">
     <div class="col-lg-12">
         <h2 class="page-header"><%= @drone.title %></h2>
+    </div>
 
+    <img id= "mainImage"  src= <%=@first_image%>  />
 
+    <h2>FILE guru</h2>
+    <% @drone.file_projects.each do |file| %>
+  <img id= "thumb"  src= <%=file.image[8]%> />
 
+</br>
 
-        <h2>FILE guru</h2>
-<% @drone.file_projects.each do |file| %>
-  <p>
-    <%= file.name %>
-  </p>
+<script>
+$('#thumb').on({
+    'click': function(){
+        $('#mainImage').attr('src', '<%=file.image[12]%>');
+    }
+});
+</script>
 <% end %>
 
 <% @drone.uploads.each do |file| %>
-  <p>
-    <%= file.uploaded_file_file_name %>
-  </p>
- <script>
 
-     window.onload =$( document ).ready (function() {
-       thingiurlbase = "/js";
-       thingiview = new Thingiview("viewer<%= file.uploaded_file_file_name %>");
-       thingiview.setObjectColor('#C0D8F0');
-       thingiview.initScene();
+    <%if file.is_image_type?%>
+      <img id= "thumb"  src= <%=file.uploaded_file.url(:thumb)%> />
 
-       thingiview.loadSTL("<%=file.uploaded_file.url(:original)%>");
-     });
-   </script>
+</br>
+    <script>
+    $('#thumb').on({
+        'click': function(){
+            $('#mainImage').attr('src', '<%=file.uploaded_file.url(:original)%>');
+        }
+    });
+    </script>
+    <% end %>
+  </br>
+
+<!--
+
+    window.onload =$( document ).ready (function() {
+    thingiurlbase = "/js";
+    thingiview = new Thingiview("viewer<%= file.uploaded_file_file_name %>");
+    thingiview.setObjectColor('#C0D8F0');
+    thingiview.initScene();
+    thingiview.loadSTL("<%=file.uploaded_file.url(:original)%>");
+    });
+  </script>
 
    <div id="viewer<%= file.uploaded_file_file_name %>" style="width:300px;height:300px"></div>
-
+-->
 <% end %>
 
-    </div>
 </div>
 
 

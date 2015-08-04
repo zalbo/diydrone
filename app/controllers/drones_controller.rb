@@ -12,6 +12,19 @@ class DronesController < ApplicationController
   # GET /drones/1
   # GET /drones/1.json
   def show
+    if @drone.fromtv
+      @first_image = @drone.image[12]
+    end
+
+    @drone.uploads.each do |file|
+      if file.is_image_type?
+        if @first_image == nil
+          @first_image = file.uploaded_file.url(:large)
+        end
+      end
+    end
+
+    @first_image
   end
 
   # GET /drones/new
