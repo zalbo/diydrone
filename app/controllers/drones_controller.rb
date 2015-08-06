@@ -23,8 +23,6 @@ class DronesController < ApplicationController
         end
       end
     end
-
-    @first_image
   end
 
   # GET /drones/new

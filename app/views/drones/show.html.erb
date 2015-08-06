@@ -6,15 +6,15 @@ $( document ).ready(function() {
 
 
   $( ".mainImage" ).mouseenter(function() {
-    document.getElementById("icon").style.zIndex = "5";
+    document.getElementById("icon").style.zIndex = "1";
   }).mouseleave(function() {
-    document.getElementById("icon").style.zIndex = "-4";
+    document.getElementById("icon").style.zIndex = "-1";
   });
 
   $( "#icon" ).mouseenter(function() {
-    document.getElementById("icon").style.zIndex = "5";
+    document.getElementById("icon").style.zIndex = "1";
   }).mouseleave(function() {
-    document.getElementById("icon").style.zIndex = "-4";
+    document.getElementById("icon").style.zIndex = "-1";
   });
 });
 </script>
@@ -23,11 +23,12 @@ $( document ).ready(function() {
     <h1><%= @drone.title %></h1>
   </div>
   <img id="icon" src="/images/guy.png" >
-  <%= image_tag(@first_image, :class => "mainImage",  )%>
+  <%= image_tag(@first_image, :class => "mainImage", size: "640x480"  )%>
 
 
   <h2>FILE guru</h2>
   <% @drone.file_projects.each do |file| %>
+  <%binding.pry%>
 
     <%= image_tag(file.image[8], :class => "thumb", :original => file.image[12])%>
 

@@ -54,27 +54,28 @@ namespace :suck_tv do
       while Net::HTTP.get(URI("https://api.thingiverse.com/search/#{tag.tag}/?access_token=#{token}&page=#{page.to_s}")) != "{\"error\":\"Not Found\"}"
         res = formatjson("https://api.thingiverse.com/search/#{tag.tag}/?access_token=#{token}&page=#{page.to_s}")
         res.each do |project|
+
           if id.include? project["id"]
             puts "ALERT:: #{project["name"]} is already in the database"
           else
             project_detail = formatjson("#{project["url"]}?access_token=#{token}")
-            api_file = formatjson("#{project_detail["files_url"]}?access_token=#{token}")
+
+            api_file = formatjson("#{project_detail["files_url"]}?access_token=#{token}") + formatjson("#{project_detail["images_url"]}?access_token=#{token}")
             if project_detail["default_image"] == nil
               puts "ALERT:: #{project["name"]}is empty"
             else #insert project
               url_image = []
 
               project_detail["default_image"]["sizes"].each do |image|
+
                 url_image << image["url"]
               end
               Drone.create(title: project["name"], user: project["creator"]["name"], id: project["id"], image: url_image , fromtv: true )
 
               api_file.each do |file|
-
                 url_image_file = []
-                if file["name"].last(3).upcase != "STL"
-                  url_image_file << "no image"
-                else
+                ext = file["name"].last(3).upcase
+                if ext == "STL"
                   #check if there are image into file
                   images = file["default_image"]
                   if images.nil?
@@ -84,6 +85,18 @@ namespace :suck_tv do
                       url_image_file << image["url"]
                     end
                   end
+                elsif ["PNG", "JPG"].include?(ext)
+                  #check if there are image into file
+                  images = file["sizes"]
+                  if images.nil?
+                    puts "no image in to file"
+                  else
+                    file["sizes"].each do |image|
+                      url_image_file << image["url"]
+                    end
+                  end
+                else
+                  url_image_file << "no image"
                 end
                 drone = Drone.find(project["id"])
                 drone.file_projects.create(id: file["id"], name: file["name"], size: file["formatted_size"],  download: file["public_url"] , image: url_image_file)
