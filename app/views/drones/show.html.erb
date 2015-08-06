@@ -19,6 +19,8 @@ $( document ).ready(function() {
 });
 </script>
 
+
+
 <div>
     <h1><%= @drone.title %></h1>
   </div>
@@ -28,10 +30,7 @@ $( document ).ready(function() {
 
   <h2>FILE guru</h2>
   <% @drone.file_projects.each do |file| %>
-  <%binding.pry%>
-
     <%= image_tag(file.image[8], :class => "thumb", :original => file.image[12])%>
-
   <%end%>
 
   <%@drone.uploads.each do |file| %>
@@ -40,11 +39,5 @@ $( document ).ready(function() {
     <%end%>
   <%end%>
 </div>
-
-
-
-
-
-
-<!-- <%= link_to 'Edit', edit_drone_path(@drone) %> |
-<%= link_to 'Back', drones_path %> -->
+<div id="back"> Indietro </div>
+<div id="next"> Avanti </div>
