@@ -1,0 +1,6 @@
+img#icon {
+    position: absolute;
+    left: 150px;
+    top: 250px;
+    z-index: -1
+}

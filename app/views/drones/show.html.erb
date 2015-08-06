@@ -1,59 +1,47 @@
-<p id="notice"><%= notice %></p>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h2 class="page-header"><%= @drone.title %></h2>
-    </div>
-
-    <img id= "mainImage"  src= <%=@first_image%>  />
-
-    <h2>FILE guru</h2>
-    <% @drone.file_projects.each do |file| %>
-  <img id= "thumb"  src= <%=file.image[8]%> />
-
-</br>
-
 <script>
-$('#thumb').on({
-    'click': function(){
-        $('#mainImage').attr('src', '<%=file.image[12]%>');
-    }
+$( document ).ready(function() {
+  $( ".thumb" ).click(function() {
+    $(".mainImage").attr('src', $(this).attr('original' ));
+  });
+
+
+  $( ".mainImage" ).mouseenter(function() {
+    document.getElementById("icon").style.zIndex = "5";
+  }).mouseleave(function() {
+    document.getElementById("icon").style.zIndex = "-4";
+  });
+
+  $( "#icon" ).mouseenter(function() {
+    document.getElementById("icon").style.zIndex = "5";
+  }).mouseleave(function() {
+    document.getElementById("icon").style.zIndex = "-4";
+  });
 });
 </script>
-<% end %>
 
-<% @drone.uploads.each do |file| %>
+<div>
+    <h1><%= @drone.title %></h1>
+  </div>
+  <img id="icon" src="/images/guy.png" >
+  <%= image_tag(@first_image, :class => "mainImage",  )%>
 
+
+  <h2>FILE guru</h2>
+  <% @drone.file_projects.each do |file| %>
+
+    <%= image_tag(file.image[8], :class => "thumb", :original => file.image[12])%>
+
+  <%end%>
+
+  <%@drone.uploads.each do |file| %>
     <%if file.is_image_type?%>
-      <img id= "thumb"  src= <%=file.uploaded_file.url(:thumb)%> />
-
-</br>
-    <script>
-    $('#thumb').on({
-        'click': function(){
-            $('#mainImage').attr('src', '<%=file.uploaded_file.url(:original)%>');
-        }
-    });
-    </script>
-    <% end %>
-  </br>
-
-<!--
-
-    window.onload =$( document ).ready (function() {
-    thingiurlbase = "/js";
-    thingiview = new Thingiview("viewer<%= file.uploaded_file_file_name %>");
-    thingiview.setObjectColor('#C0D8F0');
-    thingiview.initScene();
-    thingiview.loadSTL("<%=file.uploaded_file.url(:original)%>");
-    });
-  </script>
-
-   <div id="viewer<%= file.uploaded_file_file_name %>" style="width:300px;height:300px"></div>
--->
-<% end %>
-
+      <%= image_tag(file.uploaded_file.url(:thumb), :class => "thumb", :original => file.uploaded_file.url(:original))%>
+    <%end%>
+  <%end%>
 </div>
+
+
+
 
 
 
